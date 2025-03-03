@@ -35,6 +35,7 @@ def main():
     # the access token and the parameters that this task receives (when applicable).
     maestro = BotMaestroSDK.from_sys_args()
     ## Fetch the BotExecution with details from the task, including parameters
+    
     execution = maestro.get_execution()
 
     print(f"Task ID is: {execution.task_id}")
@@ -47,14 +48,14 @@ def main():
     bot.execute(r"C:\Program Files\Fakturama2\Fakturama.exe")
 
     # Searching for element 'new_product'
-    if not bot.find("new_product", matching=0.97, waiting_time=20000):
+    if not bot.find("new_product", matching=0.97, waiting_time=10000):
         not_found("new_product")
     bot.click()
     
-     # Searching for element 'item_number'
+    # Searching for element 'item_number'
     if not bot.find("item_number", matching=0.97, waiting_time=10000):
         not_found("item_number")
-    bot.click_relative(128, 5)
+    bot.click_relative(112, 7)
 
     # item number
     bot.paste("519")
@@ -91,6 +92,7 @@ def main():
     bot.tab()
 
     # allowance
+    bot.control_a()
     bot.paste("0")
     bot.tab()
     
@@ -104,8 +106,32 @@ def main():
     if not bot.find("free_of_tax", matching=0.97, waiting_time=10000):
         not_found("free_of_tax")
     bot.click()
+    bot.tab()
 
+    # quantity
+    bot.control_a()
+    bot.paste("20")
+
+    # Searching for element 'select_picture'
+    if not bot.find("select_picture", matching=0.97, waiting_time=10000):
+        not_found("select_picture")
+    bot.click()
+
+    bot.paste(r"C:\Bots\BotWorkSpace\bot-fakturama\resources\2345678901234.jpg")
+    bot.enter()
+
+    # save
+    # Searching for element 'save'
+    if not bot.find("save", matching=0.97, waiting_time=10000):
+        not_found("save")
+    bot.click()
     
+    # close form
+    bot.control_w()
+
+    # close fakturama
+    bot.alt_f4()
+
 
     # Uncomment to mark this task as finished on BotMaestro
     # maestro.finish_task(
