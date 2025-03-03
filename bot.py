@@ -30,6 +30,9 @@ from botcity.maestro import *
 # Disable errors if we are not connected to Maestro
 BotMaestroSDK.RAISE_NOT_CONNECTED = False
 
+# Import for CSV Plugin
+from botcity.plugins.csv import BotCSVPlugin
+
 def main():
     # Runner passes the server url, the id of the task being executed,
     # the access token and the parameters that this task receives (when applicable).
@@ -41,96 +44,102 @@ def main():
     print(f"Task ID is: {execution.task_id}")
     print(f"Task Parameters are: {execution.parameters}")
 
+    planilha = BotCSVPlugin()
+
+    dados = planilha.read(r"C:\Bots\BotWorkSpace\bot-fakturama\resources\produtos\items.csv").as_list()
+
     bot = DesktopBot()
 
     # Implement here your logic...
 
     bot.execute(r"C:\Program Files\Fakturama2\Fakturama.exe")
 
+    for item in dados:
+
     # Searching for element 'new_product'
-    if not bot.find("new_product", matching=0.97, waiting_time=10000):
-        not_found("new_product")
-    bot.click()
-    
-    # Searching for element 'item_number'
-    if not bot.find("item_number", matching=0.97, waiting_time=10000):
-        not_found("item_number")
-    bot.click_relative(112, 7)
+        if not bot.find("new_product", matching=0.97, waiting_time=10000):
+            not_found("new_product")
+        bot.click()
+        
+        # Searching for element 'item_number'
+        if not bot.find("item_number", matching=0.97, waiting_time=10000):
+            not_found("item_number")
+        bot.click_relative(112, 7)
 
-    # item number
-    bot.paste("519")
-    bot.tab()
+        # item number
+        bot.paste(item[1])
+        bot.tab()
 
-    # name
-    bot.paste("Lâmpada LED")
-    bot.tab()
+        # name
+        bot.paste(item[2])
+        bot.tab()
 
-    # category
-    bot.paste("Escritório")
-    bot.tab()
+        # category
+        bot.paste(item[3])
+        bot.tab()
 
-    # GTIN
-    bot.paste("2345678901234")
-    bot.tab()
+        # GTIN
+        bot.paste(item[4])
+        bot.tab()
 
-    # supcode
-    bot.paste("DEF456")
-    bot.tab()
+        # supcode
+        bot.paste(item[5])
+        bot.tab()
 
-    # description
-    bot.paste("Lâmpada LED de mesa")
-    bot.tab()
+        # description
+        bot.paste(item[7])
+        bot.tab()
 
-    # price
-    bot.control_a()
-    bot.paste("25,00")
-    bot.tab()
+        # price
+        bot.control_a()
+        bot.paste(item[7])
+        bot.tab()
 
-    # cost price
-    bot.control_a()
-    bot.paste("15,00")
-    bot.tab()
+        # cost price
+        bot.control_a()
+        bot.paste(item[8])
+        bot.tab()
 
-    # allowance
-    bot.control_a()
-    bot.paste("0")
-    bot.tab()
-    
-    # VAT
-    # Searching for element 'vat'
-    if not bot.find("vat", matching=0.97, waiting_time=10000):
-        not_found("vat")
-    bot.click_relative(107, 8)
+        # allowance
+        bot.control_a()
+        bot.paste(item[9])
+        bot.tab()
+        
+        # VAT
+        # Searching for element 'vat'
+        if not bot.find("vat", matching=0.97, waiting_time=10000):
+            not_found("vat")
+        bot.click_relative(107, 8)
 
-    # Searching for element 'free_of_tax'
-    if not bot.find("free_of_tax", matching=0.97, waiting_time=10000):
-        not_found("free_of_tax")
-    bot.click()
-    bot.tab()
+        # Searching for element 'free_of_tax'
+        if not bot.find("free_of_tax", matching=0.97, waiting_time=10000):
+            not_found("free_of_tax")
+        bot.click()
+        bot.tab()
 
-    # quantity
-    bot.control_a()
-    bot.paste("20")
+        # quantity
+        bot.control_a()
+        bot.paste(item[14])
 
-    # Searching for element 'select_picture'
-    if not bot.find("select_picture", matching=0.97, waiting_time=10000):
-        not_found("select_picture")
-    bot.click()
+        # Searching for element 'select_picture'
+        if not bot.find("select_picture", matching=0.97, waiting_time=10000):
+            not_found("select_picture")
+        bot.click()
 
-    bot.paste(r"C:\Bots\BotWorkSpace\bot-fakturama\resources\2345678901234.jpg")
-    bot.enter()
+        bot.paste(r"C:\Bots\BotWorkSpace\bot-fakturama\resources\produtos\imagens_produtos\item[13].jpg")
+        bot.enter()
 
-    # save
-    # Searching for element 'save'
-    if not bot.find("save", matching=0.97, waiting_time=10000):
-        not_found("save")
-    bot.click()
-    
-    # close form
-    bot.control_w()
+        # save
+        # Searching for element 'save'
+        if not bot.find("save", matching=0.97, waiting_time=10000):
+            not_found("save")
+        bot.click()
+        
+        # close form
+        bot.control_w()
 
-    # close fakturama
-    bot.alt_f4()
+        # close fakturama
+        bot.alt_f4()
 
 
     # Uncomment to mark this task as finished on BotMaestro
@@ -141,8 +150,8 @@ def main():
     # )
 
 def not_found(label):
-    print(f"Element not found: {label}")
+        print(f"Element not found: {label}")
 
 
 if __name__ == '__main__':
-    main()
+        main()
