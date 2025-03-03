@@ -43,6 +43,13 @@ def main():
     bot = DesktopBot()
 
     # Implement here your logic...
+
+    bot.execute(r"C:\Program Files\Fakturama2\Fakturama.exe")
+
+    # Searching for element 'new_product'
+    if not bot.find("new_product", matching=0.97, waiting_time=20000):
+        not_found("new_product")
+    bot.click()
     
 
     # Uncomment to mark this task as finished on BotMaestro
