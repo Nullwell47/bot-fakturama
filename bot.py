@@ -51,6 +51,10 @@ def main():
         not_found("new_product")
     bot.click()
     
+     # Searching for element 'item_number'
+    if not bot.find("item_number", matching=0.97, waiting_time=10000):
+        not_found("item_number")
+    bot.click_relative(128, 5)
 
     # Uncomment to mark this task as finished on BotMaestro
     # maestro.finish_task(
