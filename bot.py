@@ -56,6 +56,57 @@ def main():
         not_found("item_number")
     bot.click_relative(128, 5)
 
+    # item number
+    bot.paste("519")
+    bot.tab()
+
+    # name
+    bot.paste("Lâmpada LED")
+    bot.tab()
+
+    # category
+    bot.paste("Escritório")
+    bot.tab()
+
+    # GTIN
+    bot.paste("2345678901234")
+    bot.tab()
+
+    # supcode
+    bot.paste("DEF456")
+    bot.tab()
+
+    # description
+    bot.paste("Lâmpada LED de mesa")
+    bot.tab()
+
+    # price
+    bot.control_a()
+    bot.paste("25,00")
+    bot.tab()
+
+    # cost price
+    bot.control_a()
+    bot.paste("15,00")
+    bot.tab()
+
+    # allowance
+    bot.paste("0")
+    bot.tab()
+    
+    # VAT
+    # Searching for element 'vat'
+    if not bot.find("vat", matching=0.97, waiting_time=10000):
+        not_found("vat")
+    bot.click_relative(107, 8)
+
+    # Searching for element 'free_of_tax'
+    if not bot.find("free_of_tax", matching=0.97, waiting_time=10000):
+        not_found("free_of_tax")
+    bot.click()
+
+    
+
     # Uncomment to mark this task as finished on BotMaestro
     # maestro.finish_task(
     #     task_id=execution.task_id,
