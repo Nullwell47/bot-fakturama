@@ -87,7 +87,7 @@ def main():
         bot.tab()
 
         # description
-        bot.paste(item[7])
+        bot.paste(item[6])
         bot.tab()
 
         # price
