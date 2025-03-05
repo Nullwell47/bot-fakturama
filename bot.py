@@ -138,8 +138,8 @@ def main():
         # close form
         bot.control_w()
 
-        # close fakturama
-        bot.alt_f4()
+    # close fakturama
+    bot.alt_f4()
 
 
     # Uncomment to mark this task as finished on BotMaestro
