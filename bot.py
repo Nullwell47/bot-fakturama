@@ -107,12 +107,12 @@ def main():
         
         # VAT
         # Searching for element 'vat'
-        if not bot.find("vat", matching=0.97, waiting_time=10000):
+        if not bot.find("vat", matching=0.97, waiting_time=20000):
             not_found("vat")
         bot.click_relative(107, 8)
 
         # Searching for element 'free_of_tax'
-        if not bot.find("free_of_tax", matching=0.97, waiting_time=10000):
+        if not bot.find("free_of_tax", matching=0.97, waiting_time=20000):
             not_found("free_of_tax")
         bot.click()
         bot.tab()
@@ -122,16 +122,16 @@ def main():
         bot.paste(item[14])
 
         # Searching for element 'select_picture'
-        if not bot.find("select_picture", matching=0.97, waiting_time=10000):
+        if not bot.find("select_picture", matching=0.97, waiting_time=20000):
             not_found("select_picture")
         bot.click()
 
-        bot.paste(r"C:\Bots\BotWorkSpace\bot-fakturama\resources\produtos\imagens_produtos\item[13].jpg")
+        bot.paste(rf"C:\Bots\BotWorkSpace\bot-fakturama\resources\produtos\imagens_produtos\{item[13]}")
         bot.enter()
 
         # save
         # Searching for element 'save'
-        if not bot.find("save", matching=0.97, waiting_time=10000):
+        if not bot.find("save", matching=0.97, waiting_time=20000):
             not_found("save")
         bot.click()
         
